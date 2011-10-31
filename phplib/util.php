@@ -16,6 +16,12 @@ function __autoload($className) {
   }
 }
 
+function echo_r($x){
+    echo '<pre>';
+    print_r($x);
+    echo '</pre>';
+}
+
 function util_initEverything() {
   // smarty < session_start/end : smarty caches the person's nickname.
   util_defineRootPath();
