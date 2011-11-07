@@ -70,15 +70,21 @@ $rezultate = $json->responseData->results;
 $lista = "";
 $content = "";
 $messageAlert = "";
+$blackList = "";
 
 foreach($rezultate as $iter) {
+	if(stripos($iter->url, "dexonline.ro") == true)
+		continue;
 	$lista .= $iter ->url ." <br />";
-	$content .= $iter -> content . "<br /><br />";
-		
-#	$poslink = strpos($content, "dexonline.ro");
-	$posGPL = strpos($content, "licenta GPL");
+	#$content .= $iter -> content . "<br /><br />";
+	$content = @file_get_contents($iter->url);
+	
+	$poslink = stripos($content, "dexonline.ro");
+	$posGPLlicenta = stripos($content, "licenta GPL");
+	$posGPL = stripos($content, "GPL");
 
-	if($poslink == false && $posGPL == false) {
+	if($poslink == false && $posGPL == false && $posGPLlicenta == false) {
+		$blackList .= $iter->url . "<br />";
 		$messageAlert .= "Licenta GPL sau link catre dexonline.ro negasite in site-ul "  . $iter->url . "<br /><br />";
 	} else {
 		$messageAlert .= "A fost gasita o mentiune catre licenta GPL sau un link catre dexonline.ro in site-ul  " . $iter->url . "<br /><br />";
@@ -86,13 +92,14 @@ foreach($rezultate as $iter) {
 
 }
 
-$toks = explode($content, " ");
+#$toks = explode($content, " ");
 
 
 smarty_assign('JSON', "<p></p><br />" . $lista);
-smarty_assign('CRAWL_THROUGH', "<p></p><br />" . $content);
+#smarty_assign('CRAWL_THROUGH', "<p></p><br />" . $content);
 smarty_assign('ALERT', "<p></p><br />" . $messageAlert);
 #smarty_assign('JSON', "<p></p><br />" . $json ->responseData -> results[0] -> url );
-smarty_displayCommonPageWithSkin("new_stuff.ihtml");
+smarty_assign("CRAWL_THROUGH", "<p><b>Blacklist</b></p><br />" . $blackList);
+smarty_displayCommonPageWithSkin("siteClones.ihtml");
 
 ?>
