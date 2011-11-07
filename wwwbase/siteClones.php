@@ -88,7 +88,7 @@ foreach($rezultate as $iter) {
 
 # Print Blacklist items if any
 
-smarty_assign('page_title', 'New Stuff');
+smarty_assign('page_title', 'Site Clones');
 smarty_assign('Results', $word[0]);
 
 smarty_assign('JSON', "<p></p><br />" . $lista);
