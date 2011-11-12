@@ -37,17 +37,18 @@ $json = json_decode($body);
 
 $rezultate = $json->responseData->results;
 
-$listAll = "";
+$listAll = array();
 $content = "";
-$messageAlert = "";
-$blackList = "";
+$messageAlert = array();
+$blackList = array();
+
 
 foreach($rezultate as $iter) {
 	# Skip dexonline.ro from results
 	if(stripos($iter->url, "dexonline.ro") == true)
 		continue;
 	
-	$listAll .= $iter ->url ." <br />";
+	$listAll[] = $iter ->url ;
 	# Search for "licenta GPL" or "dexonline.ro" in resulted page
 	$content = @file_get_contents($iter->url);
 	
@@ -56,10 +57,10 @@ foreach($rezultate as $iter) {
 	$posGPL = stripos($content, "GPL");
 
 	if($poslink == false && $posGPL == false && $posGPLlicenta == false) {
-		$blackList .= $iter->url . "<br />";
-		$messageAlert .= "Licenta GPL sau link catre dexonline.ro negasite in site-ul "  . $iter->url . "<br /><br />";
+		$blackList[] = $iter->url;
+		$messageAlert[] = "Licenta GPL sau link catre dexonline.ro negasite in site-ul $iter->url ";
 	} else {
-		$messageAlert .= "A fost gasita o mentiune catre licenta GPL sau un link catre dexonline.ro in site-ul  " . $iter->url . "<br /><br />";
+		$messageAlert[] = "A fost gasita o mentiune catre licenta GPL sau un link catre dexonline.ro in site-ul $iter->url ";
 	}
 
 }
@@ -69,9 +70,9 @@ foreach($rezultate as $iter) {
 smarty_assign('page_title', 'Site Clones');
 smarty_assign('definition', $definition);
 
-smarty_assign('listAll', "<p></p><br />" . $listAll);
-smarty_assign('alert', "<p></p><br />" . $messageAlert);
-smarty_assign("blackList", "<p><b>Blacklist</b></p><br />" . $blackList);
+smarty_assign('listAll', $listAll);
+smarty_assign('alert', $messageAlert);
+smarty_assign("blackList", $blackList);
 smarty_displayCommonPageWithSkin("siteClones.ihtml");
 
 ?>

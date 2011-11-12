@@ -1,5 +1,17 @@
 <h2>Site Clones </h2>
-{$definition}
-{$listAll}
-{$alert}
-{$blackList}
+
+<p> {$definition} </p>
+<h3>All results </h3>
+{foreach from=$listAll  item=list}
+	<p> {$list} </p> 
+{/foreach}
+
+<h3>Message Alert </h3> 
+{foreach from=$alert item=msg}
+	<p> {$msg} </p>
+{/foreach}
+
+<h3>BlackList </h3>
+{foreach from=$blackList item=url}
+	<p> {$url} </p>
+{/foreach}
