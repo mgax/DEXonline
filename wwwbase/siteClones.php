@@ -3,14 +3,14 @@
 require_once("../phplib/util.php");
 
 # Select random definition to search.
-$count = db_getArray(db_execute("select count(*) from Definition where status = 0 and length(internalRep) > 250;"));
+$count = db_getArray("select count(*) from Definition where status = 0 and length(internalRep) > 250;");
 
 $nr = rand(1, $count[0]);
 $strnr = (string)$nr;
 
 $type = util_getRequestParameter('t');
 
-$word = db_getArray(db_execute("select htmlRep from Definition where status = 0 and length(internalRep) > 200 limit " . $strnr . ",1;"));
+$word = db_getArray("select htmlRep from Definition where status = 0 and length(internalRep) > 200 limit " . $strnr . ",1;");
 
 # Parse definition and create string to search
 $v = explode(" ", strip_tags($word[0]));
