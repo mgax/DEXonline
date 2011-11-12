@@ -26,7 +26,6 @@ $to_search = str_replace ( array( ",", "(", ")", "[", "]", "-", ";", "◊", "♦
 				array_pad( array(), 14 ,'') ,$to_search) ; 
 
 $urlGoogle = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0";
-#$apiKey = "ABQIAAAAJjSg4ig0a8tq8tf6rkzmRRRkgZ4KowWMOepZjsVjwMpJ1fhnABQTlVg9YVYaGVZuAI6SYGceehM79w";
 $apiKey = pref_getServerPreference('googleSearchApiKey');
 $url = $urlGoogle . "&q=". urlencode($to_search) . "&key=" . $apiKey;
 
