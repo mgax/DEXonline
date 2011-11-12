@@ -6,12 +6,11 @@ require_once("../phplib/util.php");
 $count = db_getSingleValue("select count(*) from Definition where status = 0 and length(internalRep) > 250;");
 
 $nr = rand(1, $count);
-$strnr = (string)$nr;
 
-$word = db_getSingleValue("select htmlRep from Definition where status = 0 and length(internalRep) > 200 limit " . $strnr . ",1;");
+$definition = db_getSingleValue("select htmlRep from Definition where status = 0 and length(internalRep) > 200 limit $nr ,1;");
 
 # Parse definition and create string to search
-$v = explode(" ", strip_tags($word));
+$v = explode(" ", strip_tags($definition));
 
 $to_search = "\"";
 
@@ -87,7 +86,7 @@ foreach($rezultate as $iter) {
 # Print Blacklist items if any
 
 smarty_assign('page_title', 'Site Clones');
-smarty_assign('results', $word);
+smarty_assign('results', $definition);
 
 smarty_assign('listAll', "<p></p><br />" . $listAll);
 smarty_assign('alert', "<p></p><br />" . $messageAlert);
