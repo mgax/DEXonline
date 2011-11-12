@@ -17,39 +17,20 @@ $to_search = "\"";
 # Set string to search start + end
 $WORD_START = 5;
 $WORD_NO = 16;
-$WORD_END = $WORD_START + $WORD_NO;
-for($i = $WORD_START; $i <= $WORD_END; $i++) {
-	$to_search .= $v[$i] . " ";
-}
 
+$to_search = implode( " ",array_slice($v, $WORD_START,$WORD_NO )) ;
+ 
 $to_search .= "\"";
-$to_search = str_replace(",", " ", $to_search);
-$to_search = str_replace("(", " ", $to_search);
-$to_search = str_replace(")", " ", $to_search);
-$to_search = str_replace("[", " ", $to_search);
-$to_search = str_replace("]", " ", $to_search);
-$to_search = str_replace("-", " ", $to_search);
-$to_search = str_replace(";", " ", $to_search);
-$to_search = str_replace("◊", " ", $to_search);
-$to_search = str_replace("♦", " ", $to_search);
-$to_search = str_replace("<", " ", $to_search);
-$to_search = str_replace(">", " ", $to_search);
-$to_search = str_replace("?", " ", $to_search);
-$to_search = str_replace("\\", " ", $to_search);
-$to_search = str_replace("/", " ", $to_search);
+
+$to_search = str_replace ( array( ",", "(", ")", "[", "]", "-", ";", "◊", "♦", "<", ">", "?", "\\", "/") ,
+				array_pad( array(), 14 ,'') ,$to_search) ; 
 
 $urlGoogle = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0";
 $apiKey = "ABQIAAAAJjSg4ig0a8tq8tf6rkzmRRRkgZ4KowWMOepZjsVjwMpJ1fhnABQTlVg9YVYaGVZuAI6SYGceehM79w";
 $url = $urlGoogle . "&q=". urlencode($to_search) . "&key=" . $apiKey;
 
-# sendRequest
-# note how referer is set manually
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_REFERER, "http://www.dexonline.ro");
-$body = curl_exec($ch);
-curl_close($ch);
+
+$body = util_fetchUrl($url) ;
 
 # now, process the JSON string
 $json = json_decode($body);
@@ -86,7 +67,7 @@ foreach($rezultate as $iter) {
 # Print Blacklist items if any
 
 smarty_assign('page_title', 'Site Clones');
-smarty_assign('results', $definition);
+smarty_assign('definition', $definition);
 
 smarty_assign('listAll', "<p></p><br />" . $listAll);
 smarty_assign('alert', "<p></p><br />" . $messageAlert);
