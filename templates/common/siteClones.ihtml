@@ -1,8 +1,5 @@
-<div class="wikiTitle">Site Clones</div>
-
-{$Results}
-{$Test}
-{$Lungime}
-{$JSON}
-{$ALERT}
-{$CRAWL_THROUGH}
+<h2>Site Clones </h2>
+{$results}
+{$listAll}
+{$alert}
+{$blackList}

@@ -59,7 +59,7 @@ $json = json_decode($body);
 
 $rezultate = $json->responseData->results;
 
-$lista = "";
+$listAll = "";
 $content = "";
 $messageAlert = "";
 $blackList = "";
@@ -69,7 +69,7 @@ foreach($rezultate as $iter) {
 	if(stripos($iter->url, "dexonline.ro") == true)
 		continue;
 	
-	$lista .= $iter ->url ." <br />";
+	$listAll .= $iter ->url ." <br />";
 	# Search for "licenta GPL" or "dexonline.ro" in resulted page
 	$content = @file_get_contents($iter->url);
 	
@@ -89,11 +89,11 @@ foreach($rezultate as $iter) {
 # Print Blacklist items if any
 
 smarty_assign('page_title', 'Site Clones');
-smarty_assign('Results', $word[0]);
+smarty_assign('results', $word[0]);
 
-smarty_assign('JSON', "<p></p><br />" . $lista);
-smarty_assign('ALERT', "<p></p><br />" . $messageAlert);
-smarty_assign("CRAWL_THROUGH", "<p><b>Blacklist</b></p><br />" . $blackList);
+smarty_assign('listAll', "<p></p><br />" . $listAll);
+smarty_assign('alert', "<p></p><br />" . $messageAlert);
+smarty_assign("blackList", "<p><b>Blacklist</b></p><br />" . $blackList);
 smarty_displayCommonPageWithSkin("siteClones.ihtml");
 
 ?>
