@@ -1,17 +1,29 @@
 <?php
 mb_internal_encoding("UTF-8");
-util_initEverything();
 
-function __autoload($className) {
-  $choices = array(util_getRootPath() . "phplib/{$className}.php",
-                   util_getRootPath() . "phplib/models/{$className}.php");
-  foreach ($choices as $choice) {
-    if (file_exists($choice)) {
-      require_once($choice);
-      return;
-    }
-  }
+/*
+ * TODO Fix this: 'Fatal error: Class 'User' not found in /var/www/DEXonline/wwwbase/user.php on line 6'
+ * Occurs when accessing word pages; eg: ./definitie/persuasiv
+ */
+spl_autoload_register();
+spl_autoload_extensions(".php");
+
+function autoloadLibClass($className) {
+  $filename = util_getRootPath()."phplib/{$className}.php";
+  if (file_exists($filename))
+    require_once($filename);
 }
+
+function autoloadModelsClass($className) {
+  $filename = util_getRootPath()."phplib/models/{$className}.php";
+  if (file_exists($filename))
+    require_once($filename);
+}
+
+spl_autoload_register("autoloadLibClass");
+spl_autoload_register("autoloadModelsClass");
+
+util_initEverything();
 
 function util_initEverything() {
   // smarty < session_start/end : smarty caches the person's nickname.
