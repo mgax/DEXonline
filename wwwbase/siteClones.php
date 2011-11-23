@@ -68,13 +68,14 @@ foreach($rezultate as $iter) {
 
 }
 
-# Print Blacklist items if any
 
 smarty_assign('page_title', 'Site Clones');
 smarty_assign('definition', $definition);
 
 smarty_assign('listAll', $listAll);
 smarty_assign('alert', $messageAlert);
+
+# Print Blacklist items if any
 smarty_assign("blackList", $blackList);
 smarty_displayCommonPageWithSkin("siteClones.ihtml");
 
