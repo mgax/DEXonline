@@ -2,16 +2,22 @@
 
 <p> {$definition} </p>
 <h3>All results </h3>
+<ul>
 {foreach from=$listAll  item=list}
-	<p><a href="{$list}" >{$list}</a></p> 
+	<li><a href="{$list}" >{$list}</a></li> 
 {/foreach}
+</ul>
 
 <h3>Message Alert </h3> 
+<ul>
 {foreach from=$alert item=msg}
-	<p> {$msg} </p>
+	<li> {$msg} </li>
 {/foreach}
+</ul>
 
 <h3>BlackList </h3>
+<ul>
 {foreach from=$blackList item=url}
-	<p><a href="{$url}" >{$url}</a></p>
+	<li><a href="{$url}" >{$url}</a></li>
 {/foreach}
+</ul>
