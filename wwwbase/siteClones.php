@@ -18,7 +18,7 @@ $to_search = "\"";
 $WORD_START = 5;
 $WORD_NO = 16;
 
-$to_search = implode( " ",array_slice($v, $WORD_START,$WORD_NO )) ;
+$to_search .= implode( " ",array_slice($v, $WORD_START,$WORD_NO )) ;
  
 $to_search .= "\"";
 
