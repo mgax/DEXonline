@@ -45,7 +45,11 @@ $blackList = array();
 
 foreach($rezultate as $iter) {
 	# Skip dexonline.ro from results
-	if(stripos($iter->url, "dexonline.ro") == true)
+	#if(stripos($iter->url, "dexonline.ro") == true)
+	#	continue;
+
+	$components = parse_url($iter->url);
+	if (StringUtil::endsWith($components['host'], 'dexonline.ro'))
 		continue;
 	
 	$listAll[] = $iter ->url ;
