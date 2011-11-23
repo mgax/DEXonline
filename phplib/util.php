@@ -1,12 +1,7 @@
 <?php
 mb_internal_encoding("UTF-8");
 
-/*
- * TODO Fix this: 'Fatal error: Class 'User' not found in /var/www/DEXonline/wwwbase/user.php on line 6'
- * Occurs when accessing word pages; eg: ./definitie/persuasiv
- */
-spl_autoload_register();
-spl_autoload_extensions(".php");
+spl_autoload_register(); //clears the autoload stack
 
 function autoloadLibClass($className) {
   $filename = util_getRootPath()."phplib/{$className}.php";
@@ -20,8 +15,8 @@ function autoloadModelsClass($className) {
     require_once($filename);
 }
 
-spl_autoload_register("autoloadLibClass");
-spl_autoload_register("autoloadModelsClass");
+spl_autoload_register("autoloadLibClass",false,true);
+spl_autoload_register("autoloadModelsClass",false,true);
 
 util_initEverything();
 
