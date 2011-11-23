@@ -57,10 +57,9 @@ foreach($rezultate as $iter) {
 	$content = @file_get_contents($iter->url);
 	
 	$poslink = stripos($content, "dexonline.ro");
-	$posGPLlicenta = stripos($content, "licenta GPL");
 	$posGPL = stripos($content, "GPL");
 
-	if($poslink == false && $posGPL == false && $posGPLlicenta == false) {
+	if($poslink === false && $posGPL === false) {
 		$blackList[] = $iter->url;
 		$messageAlert[] = "Licenta GPL sau link catre dexonline.ro negasite in site-ul $iter->url ";
 	} else {
