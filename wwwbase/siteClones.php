@@ -18,7 +18,11 @@ $to_search = "\"";
 $WORD_START = 5;
 $WORD_NO = 16;
 
+<<<<<<< HEAD
 $to_search = implode( " ",array_slice($v, $WORD_START,$WORD_NO )) ;
+=======
+$to_search .= implode( " ",array_slice($v, $WORD_START,$WORD_NO )) ;
+>>>>>>> 6e5a70105696ef72ca31f5702c48a902ce7a70ba
  
 $to_search .= "\"";
 
@@ -45,7 +49,15 @@ $blackList = array();
 
 foreach($rezultate as $iter) {
 	# Skip dexonline.ro from results
+<<<<<<< HEAD
 	if(stripos($iter->url, "dexonline.ro") == true)
+=======
+	#if(stripos($iter->url, "dexonline.ro") == true)
+	#	continue;
+
+	$components = parse_url($iter->url);
+	if (StringUtil::endsWith($components['host'], 'dexonline.ro'))
+>>>>>>> 6e5a70105696ef72ca31f5702c48a902ce7a70ba
 		continue;
 	
 	$listAll[] = $iter ->url ;
@@ -53,10 +65,16 @@ foreach($rezultate as $iter) {
 	$content = @file_get_contents($iter->url);
 	
 	$poslink = stripos($content, "dexonline.ro");
+<<<<<<< HEAD
 	$posGPLlicenta = stripos($content, "licenta GPL");
 	$posGPL = stripos($content, "GPL");
 
 	if($poslink == false && $posGPL == false && $posGPLlicenta == false) {
+=======
+	$posGPL = stripos($content, "GPL");
+
+	if($poslink === false && $posGPL === false) {
+>>>>>>> 6e5a70105696ef72ca31f5702c48a902ce7a70ba
 		$blackList[] = $iter->url;
 		$messageAlert[] = "Licenta GPL sau link catre dexonline.ro negasite in site-ul $iter->url ";
 	} else {
@@ -65,13 +83,21 @@ foreach($rezultate as $iter) {
 
 }
 
+<<<<<<< HEAD
 # Print Blacklist items if any
+=======
+>>>>>>> 6e5a70105696ef72ca31f5702c48a902ce7a70ba
 
 smarty_assign('page_title', 'Site Clones');
 smarty_assign('definition', $definition);
 
 smarty_assign('listAll', $listAll);
 smarty_assign('alert', $messageAlert);
+<<<<<<< HEAD
+=======
+
+# Print Blacklist items if any
+>>>>>>> 6e5a70105696ef72ca31f5702c48a902ce7a70ba
 smarty_assign("blackList", $blackList);
 smarty_displayCommonPageWithSkin("siteClones.ihtml");
 
