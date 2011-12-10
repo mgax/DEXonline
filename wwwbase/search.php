@@ -9,6 +9,7 @@ $defId = util_getRequestParameter('defId');
 $sourceUrlName = util_getRequestParameter('source');
 $text = util_getRequestIntParameter('text');
 $showParadigm = util_getRequestParameter('showParadigm');
+$xml = util_getRequestParameter('xml');
 
 $redirect = session_getWithDefault('redirect', false);
 $redirectFrom = session_getWithDefault('init_word', '');
@@ -288,6 +289,16 @@ smarty_assign('showParadigm', $showParadigm);
 smarty_assign('paradigmLink', $paradigmLink);
 smarty_assign('advancedSearch', $text || $sourceId);
 
-smarty_displayCommonPageWithSkin('search.ihtml');
+if ($xml) {
+  header('Content-type: text/xml');
+  $intRep = db_getSingleValue("select internalRep from Definition where status = 0 and lexicon=\"$cuv\";");
+  smarty_assign('intRep',$intRep);
+  smarty_displayCommonPageWithSkin('search.ihtml');
+  smarty_assign("results",var_dump($searchResults));
+ 
 
+
+}
+else
+  smarty_displayWithoutSkin('common/searchXML.ihtml');
 ?>

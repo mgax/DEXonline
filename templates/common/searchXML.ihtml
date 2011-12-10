@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-	<results>
-		{$row}
-	</results>
+	<cuvant>{$cuv}</cuvant>
+    <definitions>
+    {foreach from=$results item=row key=i}
+	    <definition id={$row->definition->id}>
+		    <internalRep>{$row->definition->internalRep}</internalRep>
+		    <userID>{$row->definition->userId}</userID>
+		    <res>{$searchResults}</res>
+		    <intRep>{$intRep}</intRep>
+            <definition>{$defIds}</definition>
+	    </definition>
+    </definitions>
+    {/foreach}
 </xml>
+
