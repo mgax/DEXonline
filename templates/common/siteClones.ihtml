@@ -2,6 +2,21 @@
 
 <p> {$definition} </p>
 <h3>All results </h3>
+<<<<<<< HEAD
+{foreach from=$listAll  item=list}
+	<p> {$list} </p> 
+{/foreach}
+
+<h3>Message Alert </h3> 
+{foreach from=$alert item=msg}
+	<p> {$msg} </p>
+{/foreach}
+
+<h3>BlackList </h3>
+{foreach from=$blackList item=url}
+	<p> {$url} </p>
+{/foreach}
+=======
 <ul>
 {foreach from=$listAll  item=list}
 	<li><a href="{$list}" >{$list}</a></li> 
@@ -21,3 +36,4 @@
 	<li><a href="{$url}" >{$url}</a></li>
 {/foreach}
 </ul>
+>>>>>>> 6e5a70105696ef72ca31f5702c48a902ce7a70ba
