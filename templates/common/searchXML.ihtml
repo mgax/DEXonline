@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <cuvant>{$cuv}</cuvant>
+<searchResults>
+    <word>{$cuv}</word>
     <definitions>
         {foreach from=$results item=row key=i}
         <definition id="{$row->definition->id}">
@@ -12,5 +13,4 @@
         </definition>
         {/foreach}
     </definitions>
-</xml>
-
+</searchResults>
