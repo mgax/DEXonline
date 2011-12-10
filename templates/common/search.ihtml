@@ -83,7 +83,7 @@
       {/if}
   
     {elseif $searchType == $smarty.const.SEARCH_WOTD}
-        Cuvântul zilei {if ($fdate)}(din {$fdate}){/if}
+        Cuvântul zilei{if ($fdate)} (din {$fdate}){/if}:
 
   
     {elseif $searchType == $smarty.const.SEARCH_MULTIWORD}
@@ -173,7 +173,7 @@
       <br/>
   
       <span class="defDetails">
-        Sursa: <a class="ref" href="{$wwwRoot}informatii#surse" title="{$row->source->name|escape}, {$row->source->year|escape}"
+        Sursa: <a class="ref" href="{$wwwRoot}surse" title="{$row->source->name|escape}, {$row->source->year|escape}"
         >{$row->source->shortName|escape}</a> |
         
         {* TODO de generalizat *}

@@ -60,6 +60,10 @@ table td, table th {
   padding: 2px 10px;
 }
 
+table th {
+  background: #eee;
+}
+
 .clearer {
   clear: both;
   height: 1px;
@@ -73,7 +77,6 @@ abbr {
 img {
   border: 0px; /* IE */
 }
-
 
 #staticBody {
   background: #fff;
@@ -100,6 +103,7 @@ img {
   margin-right: 3px;
   width: 16px;
 }
+
 
 /* BANNER */
 #banner_mainPage {
@@ -151,7 +155,7 @@ img {
   padding: 9px 10px;
 }
 
-#mainMenu li, #userMenu li{
+#mainMenu li, #userMenu li {
   float: left;
   font-size: 11px;
   list-style: none;
@@ -326,6 +330,13 @@ img {
   margin-top: 10px;
 }
 
+.paragraphTitle { /* paragraph titles on any page */
+  font-size: 14px; /* equivalent with h3 */
+  color: black;
+  font-weight: bold;
+  padding-left: 0px;
+}
+
 
 /* WORD OF THE DAY */
 .statusReportMini {
@@ -344,7 +355,7 @@ img {
 #wotdShadow {
   background: url("../img/zepu/shadows/shadow216.png") no-repeat;
   height: 14px;
-  margin: 0px 0px 35px 330px;
+  margin: 0px 0px 15px 330px; /* it was 0,0,35,330; I added margin-top:20px to fb_bottom, then I subtracted 20px from margin-bottom of wotdShadow */
 }
 
 
@@ -352,7 +363,7 @@ img {
 .fb_bottom {
   border-bottom: 1px solid #BFBFBF;
   border-top: 1px solid #BFBFBF;
-  margin: 0px auto 10px;
+  margin: 20px auto 10px;/*it was 0 auto 10*/
   padding: 5px 0px 0px 3px;
   width: 875px;
 }
@@ -433,6 +444,21 @@ img {
 
 
 /* others */
+.toolsLicense {
+  background: #eee url("../img/icons/exclamation.png") no-repeat 5px 5px;
+  color: #444;
+  margin: 10px 0px;
+  border: 1px solid #BFBFBF;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 5px 25px;
+  text-align: justify;
+}
+
+.browserIntegration {
+  margin-top: 0px;
+}
+
 .txt {
   padding: 10px;
 }
@@ -464,17 +490,17 @@ img {
   margin-top: 5px;
   padding: 5px;
   -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 div.resultBar {
   background: #eee;
   border: 1px solid #aaa;
   font-size: 11px;
-  margin: 10px 15px 0px 15px;
+  margin: 20px 15px 0px 15px;
   padding: 5px;
   -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
+  border-radius: 7px;
 }
 
 .stopWords {
@@ -484,7 +510,7 @@ div.resultBar {
   margin: 0px 0px 10px 5px;
   padding: 5px;
   -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
+  border-radius: 7px;
 }
 
 .wikiArticleLink {
@@ -494,11 +520,6 @@ div.resultBar {
   padding: 5px 5px 5px 20px;
 }
 
-div.wikiTitle {
-  font-size: 18px;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
 
 /* note about the new look of the expressions guide */
 #guideNotice {
@@ -506,14 +527,15 @@ div.wikiTitle {
   border: 1px solid #BFBFBF;
   border-radius: 4px;
   -moz-border-radius: 4px;
-  font-size: 120%;
-  font-weight: bold;
+  /*font-size: 120%;
+  font-weight: bold;*/
   padding: 5px 5px 5px 25px;
 }
 
 /* GUIDE INFO */
 #guideInfo {
   color: #424242;
+  display: none;
 }
 
 a.inflLink {
@@ -653,9 +675,9 @@ div.flashMessage {
   font-weight: bold;
   margin: 10px auto;
   padding: 10px;
-  width: 40em;
+  width: 480px;
   -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
+  border-radius: 7px;
 }
 
 div.flashMessage div.pic {
@@ -667,6 +689,7 @@ div.flashMessage div.pic {
 
 div.flashMessage div.text {
   float: left;
+  width: 450px;
 }
 
 div.errorType {
@@ -687,19 +710,15 @@ div.infoType div.pic {
   background: url("../img/icons/info.png") no-repeat;
 }
 
-.userEdit td {
-  border: 0;
-  padding-bottom: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
 
+/* TOPUL VOLUNTARILOR page */
 .userTop {
   border-collapse: collapse;
   margin: 15px auto;
 }
 
 .userTop td, .userTop th {
+  border: 1px solid #aaa;
   text-align: center;
   padding-right: 20px;
 }
@@ -723,6 +742,57 @@ span.spaced {
   letter-spacing: 3px;
 }
 
+
+/* CONTRIBUIE page */
+.warning {
+  background: #eee url("../img/icons/exclamation.png") no-repeat 2px center;
+  border: 1px solid #BFBFBF;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 5px 0px 5px 20px;
+}
+
+#frmContrib {
+  margin-top: 15px;
+}
+
+#defUserEdit {
+  background: #eee;
+  width: 100%;
+}
+
+#defUserEdit td {
+  border: 1px solid white;
+  min-width: 100px;
+  padding: 3px;
+  vertical-align: top;
+}
+
+.userEdit td {
+  border: none;
+  padding: 3px;
+  vertical-align: top;
+}
+
+.labelContribute {
+  padding: 5px 0px 0px 0px;
+  float: right;
+}
+
+#blankDiv {
+  display: none;
+}
+
+#defTextarea {
+  width: 755px;
+  margin: 5px 0px;
+}
+
+.addWord {
+  float: left;
+  margin-left: 5px;
+}
+
 .contribPreview {
   border: 1px solid #aaa;
   margin-left: 20px;
@@ -737,16 +807,12 @@ span.spaced {
 .contribExample th {
   font-weight: bold;
   text-align: center;
+  background: #eee;
 }
 
 .contribExample td, .contribExample th {
   border: 1px solid #aaa;
   padding: 3px 10px;
-}
-
-#contribLogin {
-  background: url("../img/icons/exclamation.png") no-repeat 0px center;
-  padding: 5px 20px;
 }
 
 #formattingLink {
@@ -758,6 +824,74 @@ span.spaced {
 table.static {
   margin-left: 20px;
 }
+
+table.static th, table.static td {
+  border: 1px solid #aaa;
+}
+
+
+/* PREFERINȚE page */
+.cbOption {
+  margin-top: 10px;
+}
+
+.describeOption {
+  color: #6B6B6B;
+  margin-left: 25px;
+}
+
+.labelOption {
+  vertical-align: 2px;
+}
+
+#skinsList {
+  margin: -25px 0px 20px 60px;
+}
+
+
+/* AUTENTIFICARE UTILIZATOR page */
+.vertSpace {
+  margin: 40px 0px 20px;
+}
+
+#loginForm {
+  width: 875px;
+}
+
+#claimIdForm input[type="radio"] {
+  margin-top: 10px;
+}
+
+div.radioButtonIndent {
+  margin-left: 26px;
+}
+
+#openidProviders a {
+  margin-right: 20px;
+}
+
+#openidProviders a img {
+  vertical-align: middle;
+}
+
+#openidHeadline span {
+  vertical-align: 15px;
+}
+
+#moveTR {
+  padding: 5px 0px 10px 185px;  /* padding-top: 5px, otherwise the 2 textinputs will be united in Opera */
+  display: block;
+}
+
+#moveTR2 {
+  padding-left: 230px;
+}
+
+.normalSize {
+  font-size: 12px; /* otherwise Firefox will put 14.667px on textinputs */
+  width: 211px;
+}
+
 
 /* jquery tablesorter stuff */
 th.header {
@@ -833,45 +967,78 @@ input.pagedisplay {
 }
 
 
-
 /* WORD OF THE DAY ARCHIVE */
 .wotdArchive {
-  margin-left: 10px;
+  margin-left: 3px;
   padding: 5px;
   -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
+  border-radius: 7px;
 }
 
 .wotdArchiveTitle {
+  color: #444;
   width: 767px;
-  background: #f4f4f4;
-  border: 1px solid #aaa;
-  font-size: 11px;
-  margin: 10px 15px 0px 15px;
+  margin: 10px 15px 0px 5px;
   padding: 5px;
-  -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
 }
 
-.wotdArchiveTable td {
-  text-align:right;
-  width: 90px;
-}
-
-.wotdArchiveTable tr.wotdHeader td{
-  text-align:center;
-  font-size: 16px;
-  font-weight: bold;
+#wotdArchiveHeader {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  background: #6B6B6B;
+  height: 30px;
+  width: 775px;
+  text-align: center;
 }
 
 .nav {
+  background: white;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
   color: #761818;
 }
 
-.nav:hover {
-  text-decoration: underline;
-  color: #CC0000;
+#navLeft {
+  background: url('../img/icons/control_rewind.png') 5px 3px no-repeat;
+  float: left;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+#wotdDate {
+  display: inline;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 30px; /* do not omit, otherwise the paragraph won't be centered */
+  width: 200px;
+}
+
+#navRight {
+  background: url('../img/icons/control_fastforward.png') 5px 3px no-repeat;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.wotdArchiveTable td {
+  border: 1px solid white;
+}
+
+.wotdArchiveTable td.activeMonth {
+  text-align:right;
+  width: 90px;
+  background: #ddd;
+  border: 1px solid white;
+}
+
+.wotdArchiveTable tr.wotdDays td {
+  padding: 10px 0px;
+  background: white;
+  text-align: center;
+  font-weight: bold;
+  color: #6B6B6B;
 }
 
 .wotdDoM {
@@ -879,6 +1046,7 @@ input.pagedisplay {
   font-weight: bold;
 }
 /* end word of the day archive */
+
 
 .favoriteDef {
   margin-bottom: 16px;
@@ -910,4 +1078,64 @@ div.internalRepDiff ins {
 
 div.internalRepDiff del {
   background-color: #FAA;
+}
+
+span.sourceName {
+  cursor: help;
+  position: relative;
+}
+
+span.sourceName span {
+  margin-left: -999em;
+  position: absolute;
+}
+
+span.sourceName:hover span {
+  background: white;
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); 
+  -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.3); 
+  -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.3);
+  margin-left: 0;
+  padding: 10px;
+  position: absolute;
+  left: 1em;
+  top: 2em;
+  z-index: 99;
+}
+
+span.sourceShortName {
+  color: #444;
+  font-size: 80%;
+  padding-left: 10px;
+}
+
+div.sourceComplete {
+  margin: 0px auto;
+  height: 16px;
+  width: 16px;
+}
+
+div.sourceComplete0 {
+  background: url("../img/icons/page_white.png") no-repeat;
+}
+
+div.sourceComplete1 {
+  background: url("../img/icons/flag_red.png") no-repeat;
+}
+
+div.sourceComplete2 {
+  background: url("../img/icons/flag_orange.png") no-repeat;
+}
+
+div.sourceComplete3 {
+  background: url("../img/icons/flag_yellow.png") no-repeat;
+}
+
+div.sourceComplete4 {
+  background: url("../img/icons/flag_blue.png") no-repeat;
+}
+
+div.sourceComplete5 {
+  background: url("../img/icons/flag_green.png") no-repeat;
 }
