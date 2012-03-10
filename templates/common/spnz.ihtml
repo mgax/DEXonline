@@ -1,18 +1,21 @@
 <h1>Spânzurătoarea</h1>
 
 <p>
-SQL: {$sql} <br />
+
 Cuvânt: {$cuv}<br /> 
 Lungime cuvânt: {$nr_lit}
 </p>
 
-<form action= "../../wwwbase/spnz.php" method ="post">
-{foreach from=$litere item=lit}
-	<input type="text" readonly="readonly" size="1" maxlength="0" value={$lit}></input>
+<form action= "" method ="get">
+{foreach from=$iter item=i}
+	<input name="{$i}" type="text" readonly="readonly" maxlength="1" size="1" value="" />
 {/foreach}
 <br /><br />
 Alegeți o literă<br />
 {foreach from=$letters item=letter}
-    <a href="">{$letter|mb_strtoupper}</a>
+    <!--<a href="">{$letter|mb_strtoupper}</a> -->
+    <!--<input type="submit" value="{$letter|mb_strtoupper}" />-->
   {/foreach}
+
+<input name="userInput" type="text" value=""/>
 </form>
