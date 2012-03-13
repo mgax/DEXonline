@@ -1,21 +1,73 @@
+{literal}
+<SCRIPT LANGUAGE="JavaScript">
+var word="{/literal}{$cuvant}{literal}";
+var lives=5, match=word.length;
+function gameOver(form) {
+  if(lives == 0) {
+    form.end.value="Ne pare rau ai pierdut";
+  }
+  else if(match == 0) {
+    form.end.value="Felicitari!!";
+  }
+}
+function letterPressed(letter,form) { 
+  var i=0, ok = 0;
+  if(lives == 0 || match == 0) {
+    return;
+  }
+  for(i=0;i<word.length;i++) {
+    if(letter == word.charAt(i)) {
+      form["out"+i].value = letter.toUpperCase();
+      ok = 1;
+      match--;
+    }
+  }
+  form["in"+letter].style.fontWeight="bold";
+  if(ok == 1) {
+    form["in"+letter].style.color="blue";
+  }
+  else {
+     lives--;
+     form["in"+letter].style.color="red";
+  }
+  form.vieti.value=lives;
+  gameOver(form);
+}
+ 
+function resetFields(form) {
+  var i=0;
+  form.vieti.value=lives;
+  for(i=0;i<word.length;i++) {
+    form["out"+i].value = "";
+  }
+  form.end.value="";
+}
+
+</SCRIPT>
+
+{/literal}
+
+<body onload="resetFields(document.form1)"> </body>
 <h1>Spânzurătoarea</h1>
 
-<p>
-
-Cuvânt: {$cuv}<br /> 
+Cuvânt: {$cuvant}<br /> 
 Lungime cuvânt: {$nr_lit}
 </p>
 
-<form action= "" method ="get">
+<form name="form1" action="" method ="get">
+Numar vieti:<input name="vieti" type="text" readonly="readonly" size="1" value="" />
+<br/>
 {foreach from=$iter item=i}
-	<input name="{$i}" type="text" readonly="readonly" maxlength="1" size="1" value="" />
+	<input name="out{$i}" type="text" readonly="readonly" size="1" value="" />
+
 {/foreach}
+
 <br /><br />
 Alegeți o literă<br />
-{foreach from=$letters item=letter}
-    <!--<a href="">{$letter|mb_strtoupper}</a> -->
-    <!--<input type="submit" value="{$letter|mb_strtoupper}" />-->
-  {/foreach}
+{foreach from=$letters item=letter} 
+    <input name="in{$letter}" type="button" value="{$letter|mb_strtoupper}" onClick="letterPressed('{$letter}', this.form); this.disabled='true'"/>
 
-<input name="userInput" type="text" value=""/>
+  {/foreach}
+<br>
+<input name="end" type="text" readonly="readonly" value="" />
 </form>
