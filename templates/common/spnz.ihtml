@@ -11,7 +11,7 @@ function gameOver(form) {
     }
   }
   else if(match == 0) {
-    form.end.value="Felicitari!!";
+    form.end.value="Felicitari ai castigat!!";
   }
 }
 function letterPressed(letter,form, field) { 
@@ -47,6 +47,19 @@ function resetFields(form) {
   }
   form.end.value="";
 }
+function Hint(form) {
+ // alert(word);
+  for(i=0;i<word.length;i++) {
+    //alert(form["in" + word.charAt(i)].disabled);
+    if(form["in" + word.charAt(i)].disabled == false) {
+     // alert("da");
+      letterPressed(word.charAt(i), form, form["in"+word.charAt(i)]);
+      form["in"+word.charAt(i)].style.color="green";
+      break;
+    }
+  }   
+
+}
 function resetGame() {
   window.location = "{/literal}{$wwwRoot}{literal}spnz.php";
 }
@@ -76,7 +89,10 @@ Alegeți o literă<br />
 
   {/foreach}
 <br>
-<input name="end" type="text" readonly="readonly" value="" />
+
+<input name="hint" type="button" value="Hint" size="1" onClick="Hint(this.form)"/>
 <br/> <br/>
+<input name="end" style="background-color:#FFFFFF;border:0;color:red;" type="text" readonly="readonly" value="" />
+<br/><br/>
 <input type="reset" value="Restart joc" onClick="resetGame()" />
 </form>
