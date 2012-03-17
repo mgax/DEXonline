@@ -28,8 +28,11 @@ if( is_int($difficulty)){
   }
 }
 
-$query = sprintf("SELECT cuv FROM  RandomWord WHERE length(cuv) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
-$cuv = db_getSingleValue($query);
+$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE length(lexicon) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
+$arr = db_getArrayOfRows($query);
+$cuv = $arr[0]["lexicon"];
+$definitie = $arr[0]["htmlRep"];
+
 $nr_lit = mb_strlen($cuv);
 $litere = array_filter(preg_split('//u',$cuv));
 $iter = range(0,$nr_lit-1);
@@ -39,6 +42,6 @@ smarty_assign('litere', $litere);
 smarty_assign('page_title', 'Spânzurătoarea by CDL');
 smarty_assign('cuvant', $cuv);
 smarty_assign('nr_lit',$nr_lit);
-
+smarty_assign('definitie', $definitie);
 smarty_displayCommonPageWithSkin("spnz.ihtml");
 ?>
