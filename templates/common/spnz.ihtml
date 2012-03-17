@@ -1,7 +1,8 @@
 {literal}
 <SCRIPT LANGUAGE="JavaScript">
 var word="{/literal}{$cuvant}{literal}";
-var lives=5, match=word.length;
+var lives=6, match=word.length;i
+var cale_poze="poze_spnz/image";
 function gameOver(form) {
   if(lives == 0) {
     form.end.value="Ne pare rau ai pierdut";
@@ -33,6 +34,7 @@ function letterPressed(letter,form, field) {
   }
   else {
      lives--;
+     form.poza.src= cale_poze + lives;
      form["in"+letter].style.color="red";
   }
   form.vieti.value=lives;
@@ -45,6 +47,7 @@ function resetFields(form) {
   for(i=0;i<word.length;i++) {
     form["out"+i].value = "";
   }
+  form.poza.src= cale+poze+lives;
   form.end.value="";
 }
 function Hint(form) {
@@ -89,6 +92,9 @@ Alegeți o literă<br />
 
   {/foreach}
 <br>
+<!-- <input type="image" name="imagine" src="image2.jpg" /> -->
+
+<img src="" name="poza" alt="poza" />
 
 <input name="hint" type="button" value="Hint" size="1" onClick="Hint(this.form)"/>
 <br/> <br/>
