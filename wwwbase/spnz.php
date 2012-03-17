@@ -13,19 +13,19 @@ $max_length = easy_max;
 
 $difficulty = (int) util_getRequestParameter('d');
 if( is_int($difficulty)){
-	switch ($difficulty) {
-		case 1:
-			$min_length = easy_max;
-			$max_length = normal_max;
-			break;
-		case 2:
-			$min_length = normal_max;
-			$max_length = hard_max;
-			break;
-		case 3:
-			$min_length = hard_max;
-			$max_length = imp_max;
-	}
+  switch ($difficulty) {
+    case 1:
+      $min_length = easy_max;
+      $max_length = normal_max;
+      break;
+    case 2:
+      $min_length = normal_max;
+      $max_length = hard_max;
+      break;
+    case 3:
+      $min_length = hard_max;
+      $max_length = imp_max;
+  }
 }
 
 $query = sprintf("SELECT cuv FROM  RandomWord WHERE length(cuv) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
