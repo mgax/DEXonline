@@ -1,11 +1,13 @@
 {literal}
 <SCRIPT LANGUAGE="JavaScript">
+var difficulty={/literal}{$difficulty}{literal}
 var word="{/literal}{$cuvant}{literal}";
 var lives=6, match=word.length;
 var cale_poze="poze_spnz/image";
 function gameOver(form) {
   if(lives == 0) {
     form.end.value="Ne pare rau ai pierdut";
+    form.hint.disabled = 'true';
     var i=0;
     for(i=0;i<word.length;i++) {
       form["out"+i].value = word.charAt(i).toUpperCase();
@@ -47,8 +49,12 @@ function resetFields(form) {
   for(i=0;i<word.length;i++) {
     form["out"+i].value = "";
   }
- // form.poza.src= cale_poze+lives+'.gif';
   form.end.value="";
+  if(difficulty<3)
+    form.harder.value="Vrei mai greu? Nivelul "+(difficulty+1);
+  else
+    form.harder.value="Hai la inceput!"
+
 }
 function Hint(form) {
  // alert(word);
@@ -60,11 +66,19 @@ function Hint(form) {
       form["in"+word.charAt(i)].style.color="green";
       break;
     }
-  }   
-
+  }  
+  if(lives >=2 )
+    lives-=2;
+  else
+    lives=0;
+  form.poza.src= cale_poze + lives + '.gif';
+  form.vieti.value=lives; 
+  gameOver(form);
 }
-function resetGame() {
-  window.location = "{/literal}{$wwwRoot}{literal}spnz.php";
+function newGame(form, a) {
+  form.hint.disabled = 'false';
+  difficulty+=a;
+  window.location = "{/literal}{$wwwRoot}{literal}spnz.php?d=" + difficulty;
 }
 </SCRIPT>
 
@@ -73,32 +87,25 @@ function resetGame() {
 <body onload="resetFields(document.form1)"> </body>
 <h1>Spânzurătoarea</h1>
 
-Cuvânt: {$cuvant}<br /> 
-Lungime cuvânt: {$nr_lit}
-</p>
-
 <form name="form1" action="" method ="get">
 Numar vieti:<input name="vieti" type="text" readonly="readonly" size="1" value="" />
 <br/>
+<img src="poze_spnz/initial.gif" name="poza" alt="poza" />
+<input name="hint" type="button" value="Hint" size="1" onClick="Hint(this.form)"/>
+<br/> <br/>
+<input name="end" style="background-color:#FFFFFF;border:0;color:red;" type="text" readonly="readonly" value="" />
 {foreach from=$iter item=i}
 	<input name="out{$i}" type="text" readonly="readonly" size="1" value="" />
 
 {/foreach}
 
-<br /><br />
+<br/><br/><br/>
 Alegeți o literă<br />
 {foreach from=$letters item=letter} 
     <input name="in{$letter}" type="button" value="{$letter|mb_strtoupper}" onClick="letterPressed('{$letter}', this.form, this)"/>
 
   {/foreach}
-<br>
-<!-- <input type="image" name="imagine" src="image2.jpg" /> -->
-
-<img src="poze_spnz/initial.gif" name="poza" alt="poza" />
-
-<input name="hint" type="button" value="Hint" size="1" onClick="Hint(this.form)"/>
-<br/> <br/>
-<input name="end" style="background-color:#FFFFFF;border:0;color:red;" type="text" readonly="readonly" value="" />
-<br/><br/>
-<input type="reset" value="Restart joc" onClick="resetGame()" />
+<br><br/><br/>
+<input type="reset" value="Restart joc" onClick="newGame(this.form, 0)" />
+<input name="harder" value="Vrei mai greu?"  type="reset" onClick="newGame(this.form, 1)" />
 </form>

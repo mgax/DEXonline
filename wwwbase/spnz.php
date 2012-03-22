@@ -8,7 +8,7 @@ define('normal_max', 15);
 define('hard_max', 20);
 define('imp_max', 99);
 
-$min_length = 1;
+$min_length = 6;
 $max_length = easy_max;
 
 $difficulty = (int) util_getRequestParameter('d');
@@ -25,8 +25,13 @@ if( is_int($difficulty)){
     case 3:
       $min_length = hard_max;
       $max_length = imp_max;
+      break;
+    default:
+      $difficulty = 0;
   }
 }
+else
+  $difficulty = 0;
 
 $query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE length(lexicon) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
 $arr = db_getArrayOfRows($query);
@@ -43,5 +48,6 @@ smarty_assign('page_title', 'Spânzurătoarea by CDL');
 smarty_assign('cuvant', $cuv);
 smarty_assign('nr_lit',$nr_lit);
 smarty_assign('definitie', $definitie);
+smarty_assign('difficulty', $difficulty);
 smarty_displayCommonPageWithSkin("spnz.ihtml");
 ?>
