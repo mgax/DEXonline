@@ -6,15 +6,17 @@ var lives=6, match=word.length;
 var cale_poze="poze_spnz/image";
 function gameOver(form) {
   if(lives == 0) {
-    form.end.value="Ne pare rau ai pierdut";
+    form.end.value="Ne pare rău ai pierdut";
     form.hint.disabled = 'true';
     var i=0;
     for(i=0;i<word.length;i++) {
       form["out"+i].value = word.charAt(i).toUpperCase();
     }
+    document.getElementById("def").style.display = "inline";
   }
   else if(match == 0) {
-    form.end.value="Felicitari ai castigat!!";
+    form.end.value="Felicitări ai câștigat!!";
+    document.getElementById("def").style.display = "inline";
   }
 }
 function letterPressed(letter,form, field) { 
@@ -83,8 +85,8 @@ function newGame(form, a) {
 </SCRIPT>
 
 {/literal}
-
-<body onload="resetFields(document.form1)"> </body>
+<body onload="resetFields(document.form1)">
+<div class="spnz">
 <h1>Spânzurătoarea</h1>
 
 <form name="form1" action="" method ="get">
@@ -94,6 +96,7 @@ Numar vieti:<input name="vieti" type="text" readonly="readonly" size="1" value="
 <input name="hint" type="button" value="Hint" size="1" onClick="Hint(this.form)"/>
 <br/> <br/>
 <input name="end" style="background-color:#FFFFFF;border:0;color:red;" type="text" readonly="readonly" value="" />
+<p id="def" hidden="true" ><br />{$definitie}<br /></p>
 {foreach from=$iter item=i}
 	<input name="out{$i}" type="text" readonly="readonly" size="1" value="" />
 
@@ -109,3 +112,5 @@ Alegeți o literă<br />
 <input type="reset" value="Restart joc" onClick="newGame(this.form, 0)" />
 <input name="harder" value="Vrei mai greu?"  type="reset" onClick="newGame(this.form, 1)" />
 </form>
+</div>
+</body>

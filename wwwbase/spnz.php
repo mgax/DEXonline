@@ -33,7 +33,7 @@ if( is_int($difficulty)){
 else
   $difficulty = 0;
 
-$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE length(lexicon) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
+$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT id FROM Lexem) AND length(lexicon) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
 $arr = db_getArrayOfRows($query);
 $cuv = $arr[0]["lexicon"];
 $definitie = $arr[0]["htmlRep"];
