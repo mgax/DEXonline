@@ -83,7 +83,16 @@ function newGame(form, a) {
   window.location = "{/literal}{$wwwRoot}{literal}spnz.php?d=" + difficulty;
 }
 </SCRIPT>
-
+<head>
+<style type="text/css">
+#Container{
+  width: 70%;
+}
+.spnz{
+  width: 100%;
+}
+</style>
+</head>
 {/literal}
 <body onload="resetFields(document.form1)">
 <div class="spnz">
