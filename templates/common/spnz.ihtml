@@ -101,7 +101,7 @@ Numar vieti:<input name="vieti" type="text" readonly="readonly" size="1" value="
 <br/>
 <p id="def" hidden="true" ><br />{$definitie}<br /></p>
 {foreach from=$iter item=i}
-	<input name="out{$i}" type="text" readonly="readonly" size="1" value="" />
+	<input style="width:10px" name="out{$i}" type="text" readonly="readonly" size="1" value="" />
 
 {/foreach}
 
