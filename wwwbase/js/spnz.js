@@ -11,6 +11,7 @@ function gameOver(form) {
     document.getElementById("def").style.display = "inline";
   }
   else if(match == 0) {
+    form.hint.disabled = 'true';
     form.end.value="Felicitări, ai câștigat!!";
     document.getElementById("def").style.display = "inline";
   }
