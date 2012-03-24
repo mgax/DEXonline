@@ -23,11 +23,11 @@ if( is_int($difficulty)){
       $max_length = hard_max;
       break;
     default :
-	  if($difficulty > 3) {
-	  	$difficulty = 3;
-    	$min_length = hard_max;
-      	$max_length = imp_max;
-		}
+      if($difficulty >= 3) {
+        $difficulty = 3;
+        $min_length = hard_max;
+        $max_length = imp_max;
+	}
       break;
   }
 }
