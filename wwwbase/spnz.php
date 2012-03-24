@@ -35,7 +35,7 @@ if( is_int($difficulty)){
 else
   $difficulty = 0;
 
-$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT id FROM Lexem WHERE frequency BETWEEN %d AND %d) AND length(lexicon) > 5 ORDER BY rand() LIMIT 1;",$min_freq, $max_freq);
+$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT definitionId FROM LexemDefinitionMap WHERE lexemId IN (SELECT id FROM Lexem WHERE frequency BETWEEN %d AND %d)) AND length(lexicon) > 5 ORDER BY rand() LIMIT 1;",$min_freq, $max_freq);
 $arr = db_getArrayOfRows($query);
 $cuv = $arr[0]["lexicon"];
 $definitie = $arr[0]["htmlRep"];
