@@ -15,7 +15,7 @@ function gameOver(form) {
     document.getElementById("def").style.display = "inline";
   }
   else if(match == 0) {
-    form.end.value="Felicitări ai câștigat!!";
+    form.end.value="Felicitări, ai câștigat!!";
     document.getElementById("def").style.display = "inline";
   }
 }
@@ -52,11 +52,6 @@ function resetFields(form) {
     form["out"+i].value = "";
   }
   form.end.value="";
-  if(difficulty<3)
-    form.harder.value="Vrei mai greu? Nivelul "+(difficulty+1);
-  else
-    form.harder.value="Hai la inceput!"
-
 }
 function Hint(form) {
  // alert(word);
@@ -79,11 +74,10 @@ function Hint(form) {
 }
 function newGame(form, a) {
   form.hint.disabled = 'false';
-  difficulty+=a;
+  difficulty = a;
   window.location = "{/literal}{$wwwRoot}{literal}spnz.php?d=" + difficulty;
 }
 </SCRIPT>
-<head>
 <style type="text/css">
 #Container{
   width: 70%;
@@ -92,19 +86,19 @@ function newGame(form, a) {
   width: 100%;
 }
 </style>
-</head>
 {/literal}
-<body onload="resetFields(document.form1)">
+<!-- <body onload="resetFields(document.form1)">-->
 <div class="spnz">
 <h1>Spânzurătoarea</h1>
 
 <form name="form1" action="" method ="get">
-Numar vieti:<input name="vieti" type="text" readonly="readonly" size="1" value="" />
+Numar vieti:<input name="vieti" type="text" readonly="readonly" size="1" value="6" />
 <br/>
 <img src="poze_spnz/initial.gif" name="poza" alt="poza" />
 <input name="hint" type="button" value="Hint" size="1" onClick="Hint(this.form)"/>
 <br/> <br/>
 <input name="end" style="background-color:#FFFFFF;border:0;color:red;" type="text" readonly="readonly" value="" />
+<br/>
 <p id="def" hidden="true" ><br />{$definitie}<br /></p>
 {foreach from=$iter item=i}
 	<input name="out{$i}" type="text" readonly="readonly" size="1" value="" />
@@ -118,8 +112,11 @@ Alegeți o literă<br />
 
   {/foreach}
 <br><br/><br/>
-<input type="reset" value="Restart joc" onClick="newGame(this.form, 0)" />
-<input name="harder" value="Vrei mai greu?"  type="reset" onClick="newGame(this.form, 1)" />
+
+<input type="button" name ="level0" value="Nivel 0" onClick="newGame(this.form, 0)">
+<input type="button" name ="level1" value="Nivel 1" onClick="newGame(this.form, 1)">
+<input type="button" name ="level2" value="Nivel 2" onClick="newGame(this.form, 2)">
+<input type="button" name ="level3" value="Nivel 3" onClick="newGame(this.form, 3)">
 </form>
 </div>
-</body>
+<!--</body>-->

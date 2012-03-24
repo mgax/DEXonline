@@ -22,12 +22,13 @@ if( is_int($difficulty)){
       $min_length = normal_max;
       $max_length = hard_max;
       break;
-    case 3:
-      $min_length = hard_max;
-      $max_length = imp_max;
+    default :
+	  if($difficulty > 3) {
+	  	$difficulty = 3;
+    	$min_length = hard_max;
+      	$max_length = imp_max;
+		}
       break;
-    default:
-      $difficulty = 0;
   }
 }
 else
