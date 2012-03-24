@@ -3,30 +3,31 @@
 require_once("../phplib/util.php");
 setlocale(LC_ALL, "ro_RO.utf8");
 
-define('easy_max', 10);
-define('normal_max', 15);
-define('hard_max', 20);
-define('imp_max', 99);
+define('limit_freq',1);
+define('easy', 0.80);
+define('normal', 0.60);
+define('hard',0.40);
+define('imp',0.20);
 
-$min_length = 6;
-$max_length = easy_max;
+$min_freq = easy;
+$max_freq = limit_freq;
 
 $difficulty = (int) util_getRequestParameter('d');
 if( is_int($difficulty)){
   switch ($difficulty) {
     case 1:
-      $min_length = easy_max;
-      $max_length = normal_max;
+      $min_freq = normal;
+      $max_freq = easy;
       break;
     case 2:
-      $min_length = normal_max;
-      $max_length = hard_max;
+      $min_freq = hard;
+      $max_freq = normal;
       break;
     default :
       if($difficulty >= 3) {
         $difficulty = 3;
-        $min_length = hard_max;
-        $max_length = imp_max;
+        $min_freq = imp;
+        $max_freq = hard;
 	}
       break;
   }
@@ -34,7 +35,7 @@ if( is_int($difficulty)){
 else
   $difficulty = 0;
 
-$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT id FROM Lexem) AND length(lexicon) BETWEEN %d AND %d  ORDER BY rand() LIMIT 1;",$min_length, $max_length);
+$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT id FROM Lexem WHERE frequency BETWEEN %d AND %d) AND length(lexicon) > 5 ORDER BY rand() LIMIT 1;",$min_freq, $max_freq);
 $arr = db_getArrayOfRows($query);
 $cuv = $arr[0]["lexicon"];
 $definitie = $arr[0]["htmlRep"];
