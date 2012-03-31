@@ -4,10 +4,10 @@ require_once("../phplib/util.php");
 setlocale(LC_ALL, "ro_RO.utf8");
 
 define('limit_freq',1);
-define('easy', 0.80);
-define('normal', 0.60);
-define('hard',0.40);
-define('imp',0.20);
+define('easy', 0.85);
+define('normal', 0.65);
+define('hard',0.45);
+define('imp',0.35);
 
 $min_freq = easy;
 $max_freq = limit_freq;
@@ -34,11 +34,13 @@ if( is_int($difficulty)){
 }
 else
   $difficulty = 0;
-
-
-$query = sprintf("SELECT id FROM Lexem WHERE frequency BETWEEN %d AND %d AND length(formUtf8General) > 5 ORDER BY rand() LIMIT 1;",$min_freq, $max_freq);
+/* OLD WITH Error
+$query = sprintf("SELECT id FROM Lexem WHERE frequency IS NOT NULL AND  frequency BETWEEN %d AND %d AND length(formUtf8General) > 5 ORDER BY rand() LIMIT 1;",$min_freq, $max_freq);
 $randLexemId =  db_getSingleValue($query);
-$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT definitionId FROM LexemDefinitionMap WHERE lexemId  = %d ) AND status=0 LIMIT 1;", $randLexemId);
+$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT definitionId FROM LexemDefinitionMap WHERE lexemId  = %d ) LIMIT 1;", $randLexemId);
+*/
+/* NEW, OK, BUT SLOW*/
+$query = sprintf("SELECT lexicon, htmlRep FROM Definition WHERE id IN (SELECT definitionId FROM LexemDefinitionMap WHERE lexemId IN (SELECT id FROM Lexem WHERE frequency BETWEEN %d AND %d )) AND length(lexicon) > 5 AND status = 0 ORDER BY rand() LIMIT 1;", $min_freq, $max_freq);
 $arr = db_getArrayOfRows($query);
 $cuv = $arr[0]["lexicon"];
 $definitie = $arr[0]["htmlRep"];
