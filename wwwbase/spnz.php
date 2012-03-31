@@ -38,7 +38,7 @@ else
 
 $query = sprintf("SELECT id FROM Lexem WHERE frequency BETWEEN %d AND %d AND length(formUtf8General) > 5 ORDER BY rand() LIMIT 1;",$min_freq, $max_freq);
 $randLexemId =  db_getSingleValue($query);
-$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT definitionId FROM LexemDefinitionMap WHERE status=0 AND lexemId  = %d ) LIMIT 1;", $randLexemId);
+$query = sprintf("SELECT lexicon, htmlRep FROM  Definition WHERE  id IN (SELECT definitionId FROM LexemDefinitionMap WHERE lexemId  = %d ) AND status=0 LIMIT 1;", $randLexemId);
 $arr = db_getArrayOfRows($query);
 $cuv = $arr[0]["lexicon"];
 $definitie = $arr[0]["htmlRep"];
