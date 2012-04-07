@@ -4,10 +4,10 @@ require_once("../phplib/util.php");
 setlocale(LC_ALL, "ro_RO.utf8");
 
 define('limit_freq',1);
-define('easy', 0.80);
-define('normal', 0.60);
-define('hard',0.40);
-define('imp',0.20);
+define('easy', 0.85);
+define('normal', 0.65);
+define('hard',0.45);
+define('imp',0.35);
 
 $min_freq = easy;
 $max_freq = limit_freq;
@@ -34,7 +34,6 @@ if( is_int($difficulty)){
 }
 else
   $difficulty = 0;
-
 $count = Model::factory('Lexem')->where_gte('frequency', $min_freq)->where_lte('frequency', $max_freq)
   ->where_raw('length(formUtf8General) > 5')->count();
 
@@ -62,6 +61,7 @@ $iter = range(0,$nr_lit-1);
 smarty_assign('iter', $iter);
 smarty_assign('letters', preg_split('//u', 'aăâbcdefghiîjklmnopqrsștțuvwxyz-',NULL,PREG_SPLIT_NO_EMPTY));
 smarty_assign('litere', $litere);
+smarty_assign('spnz',1);
 smarty_assign('page_title', 'Spânzurătoarea by CDL');
 smarty_assign('cuvant', $cuv);
 smarty_assign('nr_lit',$nr_lit);

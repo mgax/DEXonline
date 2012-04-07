@@ -2,12 +2,23 @@
 
 require_once __DIR__ . '/../phplib/util.php';
 
+<<<<<<< HEAD
+$lines = file('/tmp/Scriban.txt');
+=======
 $lines = file('/tmp/scriban.txt');
+>>>>>>> 82e7c3a73dd6ae9ac6bc484930d6f86681c7ef1a
 $scribanSrc = Source::get_by_shortName('scriban');
 
 foreach ($lines as $line) {
   $line = mb_strtolower(trim($line));
   if ($line) {
+<<<<<<< HEAD
+    $symbol = $line[0];
+    $line = str_replace(array('ş', 'ţ', '*', '!'), array('ș', 'ț', '', ''), $line);
+    $query = Model::factory('Definition')->where('sourceId', $scribanSrc->id)->where('status', 0);
+    if (ctype_digit($line)) {
+      $query = $query->where('id', $line);
+=======
     $symbol = ($line[0] == '!') ? '!' : '*';
     $line = str_replace(array('ş', 'ţ', '*', '!'), array('ș', 'ț', '', ''), $line);
     if (ctype_digit($line[0]) && !ctype_digit($line)) {
@@ -21,6 +32,7 @@ foreach ($lines as $line) {
       $query = $query->where('id', $line);
     } else if ($number) {
       $query = $query->where_raw("lexicon = '$line' and (internalRep like '@{$number}) %' or internalRep like '@*{$number}) %')");
+>>>>>>> 82e7c3a73dd6ae9ac6bc484930d6f86681c7ef1a
     } else {
       $query = $query->where('lexicon', $line);
     }
