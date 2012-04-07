@@ -371,7 +371,7 @@ th.headerSortDown {
 	color: white;
 }
 
-.statusReportMini {
+.widget {
   background: none repeat scroll 0 0 #DCF0FF;
   border: 1px solid blue;
   font-family: sans-serif;
@@ -457,6 +457,36 @@ th.headerSortDown {
 
 #wotdImage {
   padding-left: 210px;
+}
+
+#wotdSocialMedia {
+  float: right;
+}
+
+#wotdSocialMedia img {
+  vertical-align: middle;
+}
+
+#toggleTitle {
+  color: blue;
+  cursor: pointer;
+  padding-left: 20px;
+  text-decoration: underline;
+}
+
+#toggleContents {
+  display: none;
+  border: 1px solid #ccc;
+  margin: 5px 10px 0;
+  padding: 5px;
+}
+
+.toggleOpen {
+  background: url("../img/icons/bullet_arrow_up.png") no-repeat;
+}
+
+.toggleClosed {
+  background: url("../img/icons/bullet_arrow_down.png") no-repeat;
 }
 
 .warning {
