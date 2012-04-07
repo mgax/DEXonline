@@ -42,19 +42,23 @@ function letterPressed(letter,form, field) {
   gameOver(form);
 }
  
-function resetFields(form) {
+function resetGame() {
   var i=0;
+  var form = document.getElementById("form1");
+  form.hint.disabled = false;
   form.vieti.value=lives;
-  for(i=0;i<word.length;i++) {
-    form["out"+i].value = "";
+  for(i = 0; i < 33; i++) {
+	//TODO - reset the damn input letters!!!
   }
-  form.end.value="";
-}
+
+  }
 function Hint(form) {
  // alert(word);
   for(i=0;i<word.length;i++) {
     //alert(form["in" + word.charAt(i)].disabled);
     if(form["in" + word.charAt(i)].disabled == false) {
+    document.getElementById("def").style.display = "inline";
+    document.getElementById("def").style.display = "inline";
      // alert("da");
       letterPressed(word.charAt(i), form, form["in"+word.charAt(i)]);
       form["in"+word.charAt(i)].style.color="green";

@@ -18,8 +18,13 @@
 {include file="common/bits/js.ihtml" dex=1 jquery=1}
     <link rel="search" type="application/opensearchdescription+xml" href="http://dexonline.ro/download/dex.xml" title="Căutare dexonline.ro"/>
   </head>
-
+{if !$spnz}
   <body>
+{/if}
+{if $spnz}
+	<!--	 <body onload="resetGame(form1)"> -->
+	<body onload="resetGame()";>
+{/if}
     <div id="Container">
       <div id="menuShadow"></div>
       <div id="menu">
